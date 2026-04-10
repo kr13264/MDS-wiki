@@ -1,6 +1,6 @@
 # MDS Wiki Generator
 
-MDS 디자인 시스템 컴포넌트 가이드를 Confluence 위키용 HTML로 자동 생성합니다.
+컴포넌트 가이드 상세 페이지 자동 생성 → Confluence 위키로 자동 발행
 
 ## 두 가지 워크플로우
 
