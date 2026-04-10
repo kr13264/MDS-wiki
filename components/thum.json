@@ -1,0 +1,324 @@
+{
+  "name": "Thumbnail",
+  "description": "image thumbnail 컴포넌트입니다.",
+  "figmaUrl": "https://www.figma.com/design/LrURUqr7x791p7GZNy6XOA/MDS_Components?node-id=2772-51518&t=pu45IOiZh2AvVYww-4",
+  "anatomy": {
+    "imageUrl": "/uploads/figma-anatomy-2772-51519.png",
+    "figmaNodeId": "",
+    "slots": [
+      {
+        "number": 1,
+        "name": "TopHead",
+        "description": "TopHead 요소가 표시되는 영역입니다.",
+        "value": "True / False",
+        "box": {
+          "x": 6.8,
+          "y": 6.8,
+          "w": 43.2,
+          "h": 27
+        }
+      },
+      {
+        "number": 2,
+        "name": "TopTail",
+        "description": "TopTail 요소가 표시되는 영역입니다.",
+        "value": "True / False",
+        "box": {
+          "x": 6.8,
+          "y": 6.8,
+          "w": 86.5,
+          "h": 27
+        }
+      },
+      {
+        "number": 3,
+        "name": "BottomHead",
+        "description": "BottomHead 요소가 표시되는 영역입니다.",
+        "value": "True / False",
+        "box": {
+          "x": 6.8,
+          "y": 47.3,
+          "w": 43.2,
+          "h": 45.9
+        }
+      },
+      {
+        "number": 4,
+        "name": "BottonTail",
+        "description": "BottonTail 요소가 표시되는 영역입니다.",
+        "value": "True / False",
+        "box": {
+          "x": 58.4,
+          "y": 79.7,
+          "w": 13.5,
+          "h": 13.5
+        }
+      }
+    ],
+    "markers": [
+      {
+        "number": 1,
+        "x": -14.2,
+        "y": 16.2,
+        "direction": "right"
+      },
+      {
+        "number": 2,
+        "x": 113.5,
+        "y": 14.9,
+        "direction": "left"
+      },
+      {
+        "number": 3,
+        "x": -15.5,
+        "y": 86.5,
+        "direction": "right"
+      },
+      {
+        "number": 4,
+        "x": 114.9,
+        "y": 83.8,
+        "direction": "left"
+      }
+    ],
+    "guides": [
+      {
+        "x": 4.5,
+        "y": 4.5,
+        "w": 24.3,
+        "h": 23.9
+      },
+      {
+        "x": 3.4,
+        "y": 73.6,
+        "w": 24.3,
+        "h": 23.9
+      },
+      {
+        "x": 70.5,
+        "y": 3,
+        "w": 24.3,
+        "h": 23.9
+      },
+      {
+        "x": 71.5,
+        "y": 72.8,
+        "w": 24.3,
+        "h": 23.9
+      }
+    ],
+    "imageWidth": 148,
+    "imageHeight": 148
+  },
+  "properties": [
+    {
+      "title": "Type",
+      "description": "image thumbnail의 타입을 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "Image",
+          "isDefault": true
+        },
+        {
+          "label": "Media",
+          "isDefault": false
+        },
+        {
+          "label": "Gallery",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "Image",
+          "imageUrl": "/uploads/figma-2772-51519.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "Media",
+          "imageUrl": "/uploads/figma-2772-51531.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "Gallery",
+          "imageUrl": "/uploads/figma-2772-51545.png",
+          "width": 148,
+          "height": 148
+        }
+      ]
+    },
+    {
+      "title": "Radius",
+      "description": "image thumbnail의 모서리 둥글기를 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "None",
+          "isDefault": true
+        },
+        {
+          "label": "8",
+          "isDefault": false
+        },
+        {
+          "label": "12",
+          "isDefault": false
+        },
+        {
+          "label": "16",
+          "isDefault": false
+        },
+        {
+          "label": "20",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "None",
+          "imageUrl": "/uploads/figma-2772-51519.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "8",
+          "imageUrl": "/uploads/figma-2772-51559.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "12",
+          "imageUrl": "/uploads/figma-2772-51598.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "16",
+          "imageUrl": "/uploads/figma-2772-51637.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "20",
+          "imageUrl": "/uploads/figma-2772-51676.png",
+          "width": 148,
+          "height": 148
+        }
+      ]
+    },
+    {
+      "title": "Ratio",
+      "description": "image thumbnail의 비율을 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "1:1",
+          "isDefault": true
+        },
+        {
+          "label": "3:2",
+          "isDefault": false
+        },
+        {
+          "label": "3:4",
+          "isDefault": false
+        },
+        {
+          "label": "3:4.5",
+          "isDefault": false
+        },
+        {
+          "label": "3:5",
+          "isDefault": false
+        },
+        {
+          "label": "16:9",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "1:1",
+          "imageUrl": "/uploads/figma-2772-51519.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "3:2",
+          "imageUrl": "/uploads/figma-2772-52478.png",
+          "width": 148,
+          "height": 98
+        },
+        {
+          "label": "3:4",
+          "imageUrl": "/uploads/figma-2772-53176.png",
+          "width": 148,
+          "height": 197
+        },
+        {
+          "label": "3:4.5",
+          "imageUrl": "/uploads/figma-2772-53867.png",
+          "width": 148,
+          "height": 222
+        },
+        {
+          "label": "3:5",
+          "imageUrl": "/uploads/figma-2772-54636.png",
+          "width": 148,
+          "height": 246
+        },
+        {
+          "label": "16:9",
+          "imageUrl": "/uploads/figma-2772-55448.png",
+          "width": 148,
+          "height": 83
+        }
+      ]
+    },
+    {
+      "title": "Example",
+      "description": "다양한 조합의 comp.image.thumbnail 사용 예시입니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [],
+      "variantImages": [
+        {
+          "label": "Image, None, 1:1",
+          "imageUrl": "/uploads/figma-example-2772-51519.png",
+          "width": 148,
+          "height": 148
+        },
+        {
+          "label": "Media, 12, 16:9",
+          "imageUrl": "/uploads/figma-example-2772-55538.png",
+          "width": 148,
+          "height": 83
+        },
+        {
+          "label": "Gallery, None, 3:5",
+          "imageUrl": "/uploads/figma-example-2772-54662.png",
+          "width": 148,
+          "height": 246
+        },
+        {
+          "label": "Gallery, 12, 3:4.5",
+          "imageUrl": "/uploads/figma-example-2772-53971.png",
+          "width": 148,
+          "height": 222
+        },
+        {
+          "label": "Media, 8, 3:4",
+          "imageUrl": "/uploads/figma-example-2772-53227.png",
+          "width": 148,
+          "height": 197
+        }
+      ]
+    }
+  ]
+}

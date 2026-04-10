@@ -1,0 +1,124 @@
+<!-- MDS Component Wiki Template — Confluence Storage Format -->
+<!-- Variables: {{COMPONENT_NAME}}, {{DESCRIPTION}}, {{ANATOMY_IMAGE}}, {{SLOTS}}, {{PROPERTIES}} -->
+
+<ac:structured-macro ac:name="html">
+  <ac:plain-text-body><![CDATA[
+<style>
+  @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
+
+  .mds-wiki { font-family: 'Pretendard Variable', 'Pretendard', sans-serif; color: #111122; max-width: 1400px; margin: 0 auto; padding: 40px 0; }
+
+  /* ── Title ── */
+  .mds-title { font-size: 64px; font-weight: 800; letter-spacing: -0.3px; line-height: 1.1; margin: 0 0 12px; }
+  .mds-desc  { font-size: 20px; font-weight: 400; line-height: 25px; letter-spacing: -0.3px; color: #111122; margin: 0 0 60px; }
+
+  /* ── Section ── */
+  .mds-section { margin-bottom: 60px; }
+  .mds-section-title { font-size: 40px; font-weight: 700; line-height: 48px; letter-spacing: -0.3px; margin: 0 0 40px; }
+  .mds-subsection-title { font-size: 28px; font-weight: 700; line-height: 36px; letter-spacing: -0.3px; margin: 0 0 16px; }
+  .mds-subsection-desc  { font-size: 16px; font-weight: 400; line-height: 21px; letter-spacing: -0.3px; color: #111122; margin: 0 0 20px; }
+
+  /* ── Anatomy Image ── */
+  .mds-anatomy-image {
+    background: #f8f9fa; border-radius: 12px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 400px; padding: 24px; margin-bottom: 20px;
+  }
+  .mds-anatomy-image img { max-width: 100%; height: auto; }
+
+  /* ── Table ── */
+  .mds-table { width: 100%; border-collapse: collapse; border: 1px solid rgba(0,0,0,0.15); border-radius: 12px; overflow: hidden; margin-bottom: 40px; }
+  .mds-table th {
+    background: #f8f9fa; font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 16px; font-weight: 700; color: #2e2e2e;
+    text-align: left; padding: 12px 20px; height: 50px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+  }
+  .mds-table td {
+    font-size: 16px; padding: 12px 20px; height: 50px;
+    border-bottom: 1px solid rgba(0,0,0,0.08);
+    vertical-align: middle;
+  }
+  .mds-table td.slot-name { font-family: 'SF Mono', 'Fira Code', monospace; color: #2e2e2e; }
+  .mds-table td.slot-name-bold { font-family: 'SF Mono', 'Fira Code', monospace; color: #111122; font-weight: 500; }
+
+  /* ── Number Badge ── */
+  .mds-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 17px; height: 17px; border-radius: 100px;
+    border: 1.2px solid #111122; background: rgba(0,0,0,0.04);
+    font-size: 10px; font-weight: 800; letter-spacing: -0.5px;
+    color: #111122; margin-right: 8px; flex-shrink: 0;
+  }
+
+  /* ── Preview Box ── */
+  .mds-preview {
+    background: #f8f9fa; border-radius: 20px; overflow: hidden;
+    display: flex; align-items: center; justify-content: center; gap: 30px;
+    min-height: 400px; padding: 60px; flex-wrap: wrap;
+  }
+  .mds-preview-card {
+    background: #fff; border-radius: 4px; padding: 16px;
+    display: inline-flex; align-items: center;
+  }
+  .mds-preview-card img { max-height: 260px; width: auto; border-radius: 8px; }
+  .mds-preview-label {
+    font-size: 14px; font-weight: 600; color: #55557A;
+    text-align: center; margin-top: 12px; letter-spacing: -0.3px;
+  }
+
+  /* ── Property Value Tag ── */
+  .mds-tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    background: #f0f0f5; font-family: 'SF Mono', 'Fira Code', monospace;
+    font-size: 13px; color: #55557A; margin-right: 4px;
+  }
+  .mds-tag-default { background: #E6F9EE; color: #03A94D; }
+
+  /* ── Divider ── */
+  .mds-divider { border: none; border-top: 1px solid #E4E4EE; margin: 60px 0; }
+</style>
+]]></ac:plain-text-body>
+</ac:structured-macro>
+
+<ac:structured-macro ac:name="html">
+  <ac:plain-text-body><![CDATA[
+<div class="mds-wiki">
+
+  <!-- ==================== TITLE ==================== -->
+  <h1 class="mds-title">{{COMPONENT_NAME}}</h1>
+  <p class="mds-desc">{{DESCRIPTION}}</p>
+
+  <!-- ==================== MEASUREMENT / ANATOMY ==================== -->
+  <div class="mds-section">
+    <h2 class="mds-subsection-title">Measurement</h2>
+    <div class="mds-anatomy-image">
+      {{ANATOMY_IMAGE}}
+    </div>
+
+    <table class="mds-table">
+      <thead>
+        <tr>
+          <th style="width:220px;">Slots Name</th>
+          <th>Description</th>
+          <th style="width:220px;">Value</th>
+        </tr>
+      </thead>
+      <tbody>
+        {{SLOTS_ROWS}}
+      </tbody>
+    </table>
+  </div>
+
+  <hr class="mds-divider" />
+
+  <!-- ==================== PROPERTIES ==================== -->
+  <div class="mds-section">
+    <h2 class="mds-section-title">Properties</h2>
+
+    {{PROPERTY_SECTIONS}}
+  </div>
+
+</div>
+]]></ac:plain-text-body>
+</ac:structured-macro>

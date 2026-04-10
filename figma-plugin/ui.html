@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      font-size: 12px;
+      color: #333;
+      padding: 16px;
+      background: #fff;
+    }
+    h2 { font-size: 14px; font-weight: 700; }
+
+    /* Header */
+    .header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
+    .gear-btn {
+      width: 28px; height: 28px; border: none; background: none;
+      cursor: pointer; border-radius: 6px; display: flex;
+      align-items: center; justify-content: center; color: #111;
+      transition: all 0.15s;
+    }
+    .gear-btn:hover { background: #f0f0f5; color: #333; }
+    .gear-btn svg { width: 16px; height: 16px; }
+
+    /* Tabs */
+    .tabs { display: flex; gap: 6px; margin-bottom: 16px; }
+    .tab {
+      flex: 1; padding: 8px 0; border: none; border-radius: 6px;
+      font-size: 11px; font-weight: 600; cursor: pointer;
+      transition: all 0.15s; text-align: center;
+    }
+    .tab-active { background: #111122; color: #fff; }
+    .tab-inactive { background: #f0f0f5; color: #888; }
+    .tab-inactive:hover { background: #e4e4ee; color: #555; }
+
+    /* Panels */
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* Connection badge */
+    .conn-status {
+      font-size: 10px; padding: 4px 8px; border-radius: 4px;
+      display: inline-block; margin-bottom: 12px;
+    }
+    .conn-ok { background: #E6F9EE; color: #03A94D; }
+    .conn-none { background: #f0f0f5; color: #888; }
+
+    /* Selected info */
+    .selected {
+      background: #f0f0f5; border-radius: 8px; padding: 12px;
+      margin-bottom: 16px; font-weight: 600;
+    }
+    .selected .name { font-size: 14px; color: #111; }
+    .selected .meta { font-size: 11px; color: #888; margin-top: 4px; font-weight: 400; }
+
+    /* Empty state */
+    .empty { color: #999; text-align: center; padding: 40px 0; }
+
+    /* Options */
+    .options { margin-bottom: 16px; }
+    .option-row { display: flex; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .option-row label { font-size: 12px; color: #555; }
+    .option-row input[type="checkbox"] { accent-color: #111122; }
+
+    /* Buttons */
+    .btn {
+      width: 100%; padding: 10px; border: none; border-radius: 8px;
+      font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.15s;
+    }
+    .btn-generate { background: #03A94D; color: #fff; }
+    .btn-generate:hover { background: #029a44; }
+    .btn-generate:disabled { background: #ccc; cursor: default; }
+    .btn-publish {
+      background: #fff; color: #111122;
+      border: 1.5px solid #111122;
+    }
+    .btn-publish:hover { background: #f0f0f5; }
+    .btn-publish:disabled { border-color: #ccc; color: #ccc; cursor: default; background: #fff; }
+
+    /* Progress */
+    .progress {
+      margin-top: 12px; padding: 8px 12px; background: #f8f9fa;
+      border-radius: 6px; font-size: 11px; color: #555; display: none;
+    }
+
+    /* Settings Modal */
+    .modal-overlay {
+      display: none; position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0,0,0,0.3); z-index: 100;
+    }
+    .modal {
+      position: absolute; top: 12px; left: 12px; right: 12px; bottom: 12px;
+      background: #fff; border-radius: 12px; padding: 20px;
+      overflow-y: auto; box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    }
+    .modal h3 { font-size: 16px; font-weight: 700; margin-bottom: 16px; }
+    .modal-section { margin-bottom: 16px; }
+    .modal-section-title { font-size: 12px; font-weight: 700; color: #111; margin-bottom: 12px; }
+    .modal-divider { border: none; border-top: 1px solid #eee; margin: 16px 0; }
+    .field { margin-bottom: 12px; }
+    .field-label {
+      font-size: 10px; font-weight: 700; color: #6B4FBB;
+      text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px;
+    }
+    .field input {
+      width: 100%; padding: 8px 10px; border: 1.5px solid #e4e4ee;
+      border-radius: 8px; font-size: 12px; font-family: inherit;
+      outline: none; transition: border-color 0.15s;
+    }
+    .field input:focus { border-color: #6B4FBB; }
+    .field input::placeholder { color: #bbb; }
+    .modal-buttons { display: flex; gap: 8px; margin-top: 16px; }
+    .modal-buttons .btn-cancel {
+      flex: 1; padding: 10px; border: none; border-radius: 8px;
+      background: #f0f0f5; color: #555; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .modal-buttons .btn-cancel:hover { background: #e4e4ee; }
+    .modal-buttons .btn-save {
+      flex: 1; padding: 10px; border: none; border-radius: 8px;
+      background: #03A94D; color: #fff; font-size: 13px; font-weight: 600; cursor: pointer;
+    }
+    .modal-buttons .btn-save:hover { background: #029a44; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <div class="header">
+    <h2>MDS CompDocs</h2>
+    <button class="gear-btn" id="btn-settings" title="설정">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="tab tab-active" id="tab-1">1단계 가이드 생성</button>
+    <button class="tab tab-inactive" id="tab-2">2단계 위키 생성</button>
+  </div>
+
+  <!-- Panel 1: 가이드 생성 -->
+  <div class="panel active" id="panel-1">
+    <div id="empty-1" class="empty">컴포넌트 세트를 선택해주세요</div>
+
+    <div id="selected-1" class="selected" style="display:none;">
+      <div class="name" id="comp-name"></div>
+      <div class="meta" id="comp-meta"></div>
+    </div>
+
+    <div id="options" class="options" style="display:none;">
+      <div class="option-row">
+        <input type="checkbox" id="opt-measurement" checked />
+        <label for="opt-measurement">Measurement (Anatomy) 섹션 포함</label>
+      </div>
+      <div class="option-row">
+        <input type="checkbox" id="opt-example" checked />
+        <label for="opt-example">Example 섹션 포함</label>
+      </div>
+    </div>
+
+    <button id="btn-generate" class="btn btn-generate" style="display:none;">가이드 페이지 생성</button>
+  </div>
+
+  <!-- Panel 2: 위키 생성 -->
+  <div class="panel" id="panel-2">
+    <div id="conn-badge" class="conn-status conn-none">Confluence 미연결</div>
+
+    <div id="empty-2" class="empty">가이드 페이지를 선택해주세요</div>
+
+    <div id="selected-2" class="selected" style="display:none;">
+      <div class="name" id="guide-name"></div>
+      <div class="meta" id="guide-meta"></div>
+    </div>
+
+    <button id="btn-publish" class="btn btn-publish" style="display:none;">Confluence 발행</button>
+  </div>
+
+  <!-- Progress (shared) -->
+  <div id="progress" class="progress"></div>
+
+  <!-- Settings Modal -->
+  <div id="modal-overlay" class="modal-overlay">
+    <div class="modal">
+      <h3>설정</h3>
+
+      <div class="modal-section" style="background:#f8f9fa; border-radius:8px; padding:12px; margin-bottom:16px;">
+        <div style="font-size:11px; font-weight:700; color:#111; margin-bottom:8px;">처음 사용하시나요?</div>
+        <div style="font-size:11px; color:#555; line-height:1.6;">
+          1. 터미널에서 프로젝트 폴더로 이동<br/>
+          <code style="background:#e4e4ee; padding:2px 6px; border-radius:4px; font-size:10px;">cd mds-wiki</code><br/>
+          2. 위키 서버 실행<br/>
+          <code style="background:#e4e4ee; padding:2px 6px; border-radius:4px; font-size:10px;">node server/index.mjs</code><br/>
+          3. 아래 항목을 채우고 저장하면 준비 완료!
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <div class="modal-section-title">Wiki Server</div>
+        <div class="field">
+          <div class="field-label">SERVER URL</div>
+          <input type="text" id="set-server-url" placeholder="http://localhost:3456" />
+        </div>
+      </div>
+      <hr class="modal-divider" />
+      <div class="modal-section">
+        <div class="modal-section-title">Confluence</div>
+        <div class="field">
+          <div class="field-label">BASE URL</div>
+          <input type="text" id="set-conf-url" placeholder="https://wiki.navercorp.com" />
+        </div>
+        <div class="field">
+          <div class="field-label">SPACE KEY</div>
+          <input type="text" id="set-space-key" placeholder="NAVCOUX" />
+        </div>
+        <div class="field">
+          <div class="field-label">PARENT PAGE ID</div>
+          <input type="text" id="set-parent-id" placeholder="5088064858" />
+        </div>
+        <div class="field">
+          <div class="field-label">API TOKEN</div>
+          <input type="password" id="set-conf-token" placeholder="토큰을 입력하세요" />
+        </div>
+      </div>
+      <div class="modal-buttons">
+        <button class="btn-cancel" id="btn-modal-cancel">취소</button>
+        <button class="btn-save" id="btn-modal-save">저장</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // ─── Elements ─────────────────────────────────────────
+    const tab1 = document.getElementById('tab-1');
+    const tab2 = document.getElementById('tab-2');
+    const panel1 = document.getElementById('panel-1');
+    const panel2 = document.getElementById('panel-2');
+    const btnGenerate = document.getElementById('btn-generate');
+    const btnPublish = document.getElementById('btn-publish');
+    const optionsEl = document.getElementById('options');
+    const progressEl = document.getElementById('progress');
+    const connBadge = document.getElementById('conn-badge');
+    const modalOverlay = document.getElementById('modal-overlay');
+
+    let currentTab = 1;
+    let currentSettings = {};
+    let selectionState = { component: null, guide: null };
+
+    // ─── Tabs ─────────────────────────────────────────────
+    function switchTab(num) {
+      currentTab = num;
+      tab1.className = num === 1 ? 'tab tab-active' : 'tab tab-inactive';
+      tab2.className = num === 2 ? 'tab tab-active' : 'tab tab-inactive';
+      panel1.className = num === 1 ? 'panel active' : 'panel';
+      panel2.className = num === 2 ? 'panel active' : 'panel';
+      progressEl.style.display = 'none';
+    }
+
+    tab1.addEventListener('click', () => switchTab(1));
+    tab2.addEventListener('click', () => switchTab(2));
+
+    // ─── Load settings on start ───────────────────────────
+    parent.postMessage({ pluginMessage: { type: 'load-settings' } }, '*');
+
+    function updateConnBadge() {
+      if (currentSettings.confluenceBaseUrl && currentSettings.confluenceToken) {
+        connBadge.className = 'conn-status conn-ok';
+        connBadge.textContent = 'Confluence 연결됨';
+      } else {
+        connBadge.className = 'conn-status conn-none';
+        connBadge.textContent = 'Confluence 미연결';
+      }
+    }
+
+    function updatePanel1() {
+      const hasComp = !!selectionState.component;
+      document.getElementById('empty-1').style.display = hasComp ? 'none' : 'block';
+      document.getElementById('selected-1').style.display = hasComp ? 'block' : 'none';
+      optionsEl.style.display = hasComp ? 'block' : 'none';
+      btnGenerate.style.display = hasComp ? 'block' : 'none';
+
+      if (hasComp) {
+        document.getElementById('comp-name').textContent = selectionState.component.name;
+        document.getElementById('comp-meta').textContent =
+          `${selectionState.component.variantCount}개 variants · ${selectionState.component.propCount}개 properties`;
+      }
+    }
+
+    function updatePanel2() {
+      const hasGuide = !!selectionState.guide;
+      const ready = currentSettings.confluenceBaseUrl && currentSettings.confluenceToken;
+
+      document.getElementById('empty-2').style.display = hasGuide ? 'none' : 'block';
+      document.getElementById('selected-2').style.display = hasGuide ? 'block' : 'none';
+      btnPublish.style.display = hasGuide ? 'block' : 'none';
+      btnPublish.disabled = !ready;
+      btnPublish.textContent = 'Confluence 발행';
+
+      if (hasGuide) {
+        document.getElementById('guide-name').textContent = selectionState.guide.name + ' Guide';
+        document.getElementById('guide-meta').textContent = ready
+          ? '가이드 페이지 선택됨 · Confluence 발행 가능'
+          : '가이드 페이지 선택됨 · 설정에서 Confluence 연결 필요';
+      }
+    }
+
+    // ─── Settings Modal ───────────────────────────────────
+    document.getElementById('btn-settings').addEventListener('click', () => {
+      document.getElementById('set-server-url').value = currentSettings.serverUrl || '';
+      document.getElementById('set-conf-url').value = currentSettings.confluenceBaseUrl || '';
+      document.getElementById('set-space-key').value = currentSettings.spaceKey || '';
+      document.getElementById('set-parent-id').value = currentSettings.parentPageId || '';
+      document.getElementById('set-conf-token').value = currentSettings.confluenceToken || '';
+      modalOverlay.style.display = 'block';
+    });
+
+    document.getElementById('btn-modal-cancel').addEventListener('click', () => {
+      modalOverlay.style.display = 'none';
+    });
+
+    document.getElementById('btn-modal-save').addEventListener('click', () => {
+      currentSettings = {
+        serverUrl: document.getElementById('set-server-url').value.replace(/\/+$/, ''),
+        confluenceBaseUrl: document.getElementById('set-conf-url').value.replace(/\/+$/, ''),
+        spaceKey: document.getElementById('set-space-key').value,
+        parentPageId: document.getElementById('set-parent-id').value,
+        confluenceToken: document.getElementById('set-conf-token').value,
+      };
+      parent.postMessage({ pluginMessage: { type: 'save-settings', settings: currentSettings } }, '*');
+      modalOverlay.style.display = 'none';
+      updateConnBadge();
+      updatePanel2();
+    });
+
+    // ─── Messages from Plugin Code ────────────────────────
+    window.onmessage = (event) => {
+      const msg = event.data.pluginMessage;
+      if (!msg) return;
+
+      if (msg.type === 'settings-loaded') {
+        currentSettings = msg.settings || {};
+        updateConnBadge();
+        updatePanel2();
+      }
+
+      if (msg.type === 'settings-saved') {
+        showProgress('설정이 저장되었습니다.', '#E6F9EE', '#03A94D');
+      }
+
+      if (msg.type === 'selection') {
+        selectionState = { component: msg.component, guide: msg.guide };
+        updatePanel1();
+        updatePanel2();
+
+        // 자동 탭 전환: 선택에 맞는 탭으로
+        if (msg.component && currentTab === 2) switchTab(1);
+        if (msg.guide && currentTab === 1) switchTab(2);
+      }
+
+      if (msg.type === 'progress') {
+        progressEl.style.display = 'block';
+        progressEl.style.background = '#f8f9fa';
+        progressEl.style.color = '#555';
+        progressEl.textContent = msg.text;
+      }
+
+      if (msg.type === 'done') {
+        showProgress('가이드 페이지가 생성되었습니다!', '#E6F9EE', '#03A94D');
+        btnGenerate.disabled = false;
+        btnGenerate.textContent = '가이드 페이지 생성';
+        // 1단계 완료 → 2단계 탭으로 자동 전환
+        setTimeout(() => switchTab(2), 800);
+      }
+
+      if (msg.type === 'error') {
+        showProgress(msg.text, '#fff5f5', '#e53e3e');
+        btnGenerate.disabled = false;
+        btnGenerate.textContent = '가이드 페이지 생성';
+        btnPublish.disabled = false;
+        btnPublish.textContent = 'Confluence 발행';
+      }
+
+      if (msg.type === 'publish-data') {
+        publishToServer(msg.component);
+      }
+    };
+
+    // ─── Generate ─────────────────────────────────────────
+    btnGenerate.addEventListener('click', () => {
+      btnGenerate.disabled = true;
+      btnGenerate.textContent = '생성 중...';
+      progressEl.style.display = 'block';
+      progressEl.style.background = '#f8f9fa';
+      progressEl.style.color = '#555';
+      progressEl.textContent = '컴포넌트 분석 중...';
+
+      parent.postMessage({ pluginMessage: {
+        type: 'generate',
+        options: {
+          includeMeasurement: document.getElementById('opt-measurement').checked,
+          includeExample: document.getElementById('opt-example').checked,
+        }
+      }}, '*');
+    });
+
+    // ─── Publish ──────────────────────────────────────────
+    btnPublish.addEventListener('click', () => {
+      btnPublish.disabled = true;
+      btnPublish.textContent = '발행 준비 중...';
+      progressEl.style.display = 'block';
+      progressEl.style.background = '#f8f9fa';
+      progressEl.style.color = '#555';
+      progressEl.textContent = '이미지 내보내기 중...';
+
+      parent.postMessage({ pluginMessage: { type: 'publish' } }, '*');
+    });
+
+    async function publishToServer(component) {
+      try {
+        progressEl.textContent = 'Confluence에 발행 중...';
+
+        const serverUrl = currentSettings.serverUrl || 'http://localhost:3456';
+        const res = await fetch(serverUrl + '/api/plugin/publish', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            component: component,
+            confluence: {
+              baseUrl: currentSettings.confluenceBaseUrl,
+              spaceKey: currentSettings.spaceKey,
+              parentPageId: currentSettings.parentPageId,
+              user: currentSettings.confluenceUser,
+              token: currentSettings.confluenceToken,
+            },
+          }),
+        });
+
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+
+        const action = data.action === 'updated' ? '업데이트' : '생성';
+        progressEl.style.display = 'block';
+        progressEl.style.background = '#E6F9EE';
+        progressEl.style.color = '#03A94D';
+        if (data.url) {
+          progressEl.innerHTML = `${action} 완료! <a href="${data.url}" target="_blank" style="color:#03A94D;font-weight:600;text-decoration:underline;">위키에서 보기</a>`;
+        } else {
+          progressEl.textContent = `Confluence에 ${action}되었습니다!`;
+        }
+        btnPublish.disabled = false;
+        btnPublish.textContent = 'Confluence 발행';
+      } catch (err) {
+        showProgress('발행 실패: ' + err.message, '#fff5f5', '#e53e3e');
+        btnPublish.disabled = false;
+        btnPublish.textContent = 'Confluence 발행';
+      }
+    }
+
+    function showProgress(text, bg, color) {
+      progressEl.style.display = 'block';
+      progressEl.style.background = bg;
+      progressEl.style.color = color;
+      progressEl.textContent = text;
+    }
+  </script>
+</body>
+</html>

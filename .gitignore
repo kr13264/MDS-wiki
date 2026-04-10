@@ -1,0 +1,5 @@
+node_modules/
+wiki.config.json
+public/uploads/
+output/
+.DS_Store

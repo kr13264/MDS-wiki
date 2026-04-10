@@ -1,0 +1,215 @@
+{
+  "name": "comp.button.icon",
+  "description": "아이콘만으로 구성된 버튼 컴포넌트입니다.",
+  "figmaUrl": "https://www.figma.com/design/LrURUqr7x791p7GZNy6XOA/MDS_Components?node-id=2146-6851&t=pu45IOiZh2AvVYww-4",
+  "anatomy": {
+    "imageUrl": "/uploads/figma-anatomy-2146-6852.png",
+    "figmaNodeId": "",
+    "slots": [],
+    "markers": [],
+    "guides": [],
+    "imageWidth": 30,
+    "imageHeight": 30
+  },
+  "properties": [
+    {
+      "title": "Style",
+      "description": "button icon의 스타일 유형을 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "Plain",
+          "isDefault": true
+        },
+        {
+          "label": "Outlined",
+          "isDefault": false
+        },
+        {
+          "label": "Solid",
+          "isDefault": false
+        },
+        {
+          "label": "Tonal",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "Plain",
+          "imageUrl": "/uploads/figma-2146-6852.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "Outlined",
+          "imageUrl": "/uploads/figma-2146-6855.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "Solid",
+          "imageUrl": "/uploads/figma-2146-6858.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "Tonal",
+          "imageUrl": "/uploads/figma-2146-6861.png",
+          "width": 30,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "title": "Size",
+      "description": "button icon의 크기를 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "sm",
+          "isDefault": true
+        },
+        {
+          "label": "md",
+          "isDefault": false
+        },
+        {
+          "label": "lg",
+          "isDefault": false
+        },
+        {
+          "label": "xl",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "sm",
+          "imageUrl": "/uploads/figma-2146-6852.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "md",
+          "imageUrl": "/uploads/figma-2146-6864.png",
+          "width": 36,
+          "height": 36
+        },
+        {
+          "label": "lg",
+          "imageUrl": "/uploads/figma-2146-6876.png",
+          "width": 40,
+          "height": 40
+        },
+        {
+          "label": "xl",
+          "imageUrl": "/uploads/figma-2200-5924.png",
+          "width": 44,
+          "height": 44
+        }
+      ]
+    },
+    {
+      "title": "State",
+      "description": "button icon의 상태를 나타냅니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "Enabled",
+          "isDefault": true
+        },
+        {
+          "label": "Disabled",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "Enabled",
+          "imageUrl": "/uploads/figma-2146-6852.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "Disabled",
+          "imageUrl": "/uploads/figma-2146-6888.png",
+          "width": 30,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "title": "FAB",
+      "description": "button icon의 FAB을(를) 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "False",
+          "isDefault": true
+        },
+        {
+          "label": "True",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "False",
+          "imageUrl": "/uploads/figma-2146-6852.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "True",
+          "imageUrl": "/uploads/figma-2146-6933.png",
+          "width": 30,
+          "height": 30
+        }
+      ]
+    },
+    {
+      "title": "Example",
+      "description": "다양한 조합의 comp.button.icon 사용 예시입니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [],
+      "variantImages": [
+        {
+          "label": "Plain, sm, Enabled, False",
+          "imageUrl": "/uploads/figma-example-2146-6852.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "Plain, sm, Enabled, True",
+          "imageUrl": "/uploads/figma-example-2146-6933.png",
+          "width": 30,
+          "height": 30
+        },
+        {
+          "label": "Tonal, lg, Disabled, False",
+          "imageUrl": "/uploads/figma-example-2146-6912.png",
+          "width": 40,
+          "height": 40
+        },
+        {
+          "label": "Tonal, xl, Enabled, False",
+          "imageUrl": "/uploads/figma-example-2200-5978.png",
+          "width": 44,
+          "height": 44
+        },
+        {
+          "label": "Solid, sm, Enabled, False",
+          "imageUrl": "/uploads/figma-example-2146-6858.png",
+          "width": 30,
+          "height": 30
+        }
+      ]
+    }
+  ]
+}

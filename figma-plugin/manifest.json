@@ -1,0 +1,16 @@
+{
+  "name": "MDS CompDocs",
+  "id": "1624376117750450062",
+  "api": "1.0.0",
+  "main": "code.js",
+  "ui": "ui.html",
+  "editorType": ["figma"],
+  "networkAccess": {
+    "allowedDomains": ["none"],
+    "devAllowedDomains": ["http://localhost:3456"],
+    "reasoning": "Sends component data to local MDS Wiki server for Confluence publishing"
+  },
+  "capabilities": [],
+  "permissions": ["currentuser"],
+  "documentAccess": "dynamic-page"
+}
