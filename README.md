@@ -9,6 +9,7 @@ Figma에서 컴포넌트 데이터를 추출 → 웹 에디터(`localhost:3456`)
 
 - API 경로: `/api/web/...`
 - 관련 파일: `public/` (프론트엔드), `server/index.mjs` (서버)
+- 관련 테스트 링크 : https://wiki.navercorp.com/spaces/NAVCOUX/pages/5088078682/Comp.+Auto+TEST
 
 ### 2. Figma 플러그인 방식
 Figma에서 직접 가이드 페이지 생성 → 플러그인에서 바로 Confluence 발행
