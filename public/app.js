@@ -1124,18 +1124,18 @@ function generateConfluenceHTML(d) {
 
     return `
       <div style="margin-bottom:40px;">
-        <h3 style="font-size:28px;font-weight:700;line-height:36px;letter-spacing:-0.3px;margin:0 0 16px;">${esc(p.title)}</h3>
+        <h3 style="font-size:24px;font-weight:700;line-height:32px;letter-spacing:-0.3px;margin:0 0 16px;">${esc(p.title)}</h3>
         <p style="font-size:16px;font-weight:400;line-height:21px;letter-spacing:-0.3px;margin:0 0 20px;">${esc(p.description)}</p>
         ${tags ? `<p style="margin:0 0 20px;">${tags}</p>` : ""}
         ${img}
       </div>`;
   }).join("");
 
-  return `<div style="font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;color:#111122;max-width:1400px;margin:0 auto;padding:100px 80px;border-radius:36px;background:#fff;">
-  <div style="font-size:64px;font-weight:800;letter-spacing:-0.3px;line-height:1.1;margin:0 0 12px;background:transparent;">${esc(d.name)}</div>
+  return `<div style="font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;color:#111122;max-width:1024px;margin:0 auto;padding:50px 40px;border-radius:36px;background:#fff;">
+  <div style="font-size:40px;font-weight:800;letter-spacing:-0.3px;line-height:1.1;margin:0 0 12px;background:transparent;">${esc(d.name)}</div>
   <p style="font-size:16px;font-weight:400;line-height:21px;letter-spacing:-0.3px;margin:0 0 60px;">${esc(d.description)}</p>
   ${d.anatomy.imageUrl || (d.anatomy.slots && d.anatomy.slots.length > 0) ? `<div style="margin-bottom:60px;">
-    <h2 style="font-size:28px;font-weight:700;line-height:36px;letter-spacing:-0.3px;margin:0 0 16px;">Measurement</h2>
+    <h2 style="font-size:24px;font-weight:700;line-height:32px;letter-spacing:-0.3px;margin:0 0 16px;">Measurement</h2>
     <div style="margin-bottom:20px;">${anatomySection}</div>
     ${slotsRows ? `<table style="width:100%;border-collapse:collapse;border:1px solid rgba(0,0,0,0.15);border-radius:12px;overflow:hidden;margin-bottom:40px;">
       <thead><tr>
@@ -1147,10 +1147,7 @@ function generateConfluenceHTML(d) {
     </table>` : ""}
   </div>
   <hr style="border:none;border-top:1px solid #E4E4EE;margin:60px 0;"/>` : ""}
-  <div style="margin-bottom:60px;">
-    <h2 style="font-size:40px;font-weight:700;line-height:48px;letter-spacing:-0.3px;margin:0 0 40px;">Properties</h2>
-    ${propertySections}
-  </div>
+  ${propertySections}
 </div>`;
 }
 

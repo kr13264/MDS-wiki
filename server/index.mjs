@@ -891,6 +891,18 @@ async function publishToConfluence(config, title, htmlBody) {
 
 // ─── Generate HTML from Guide Frame Images ───────────────
 
+function pngDimensions(dataUri) {
+  // Extract width/height from base64 PNG header (IHDR chunk)
+  try {
+    const b64 = dataUri.replace(/^data:image\/png;base64,/, "");
+    const buf = Buffer.from(b64, "base64");
+    // PNG: bytes 16-19 = width, 20-23 = height (big-endian)
+    const w = buf.readUInt32BE(16);
+    const h = buf.readUInt32BE(20);
+    return { w: Math.round(w / 2), h: Math.round(h / 2) }; // scale=2 → half
+  } catch { return null; }
+}
+
 function generateGuideImageHtml(d) {
   const esc = (s) => String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 
@@ -900,8 +912,10 @@ function generateGuideImageHtml(d) {
     const m = d.measurement;
     let anatomyImg = "";
     if (m.anatomyImage) {
+      const dim = pngDimensions(m.anatomyImage);
+      const sizeAttr = dim ? ` width="${dim.w}" height="${dim.h}"` : "";
       anatomyImg = `<div style="background:#f8f9fa;border-radius:16px;overflow:hidden;padding:50px;text-align:center;margin-bottom:20px;">
-        <img src="${m.anatomyImage}" alt="Anatomy" style="max-width:100%;height:auto;display:inline-block;" />
+        <img src="${m.anatomyImage}" alt="Anatomy"${sizeAttr} style="height:auto;display:inline-block;max-width:100%;" />
       </div>`;
     }
 
@@ -924,7 +938,7 @@ function generateGuideImageHtml(d) {
     </table>` : "";
 
     measurementHtml = `<div style="margin-bottom:60px;">
-      <h2 style="font-size:28px;font-weight:700;line-height:36px;letter-spacing:-0.3px;margin:0 0 16px;">Measurement</h2>
+      <h2 style="font-size:24px;font-weight:700;line-height:32px;letter-spacing:-0.3px;margin:0 0 16px;">Measurement</h2>
       ${anatomyImg}
       ${slotsTable}
     </div>
@@ -942,13 +956,15 @@ function generateGuideImageHtml(d) {
 
     let gridImg = "";
     if (p.variantGridImage) {
+      const dim = pngDimensions(p.variantGridImage);
+      const sizeAttr = dim ? ` width="${dim.w}" height="${dim.h}"` : "";
       gridImg = `<div style="margin-top:20px;">
-        <img src="${p.variantGridImage}" alt="${esc(p.title)}" style="max-width:100%;height:auto;display:block;border-radius:16px;" />
+        <img src="${p.variantGridImage}" alt="${esc(p.title)}"${sizeAttr} style="height:auto;display:block;border-radius:16px;max-width:100%;" />
       </div>`;
     }
 
     return `<div style="margin-bottom:40px;">
-      <h3 style="font-size:28px;font-weight:700;line-height:36px;letter-spacing:-0.3px;margin:0 0 16px;">${esc(p.title)}</h3>
+      <h3 style="font-size:24px;font-weight:700;line-height:32px;letter-spacing:-0.3px;margin:0 0 16px;">${esc(p.title)}</h3>
       <p style="font-size:16px;font-weight:400;line-height:21px;letter-spacing:-0.3px;margin:0 0 20px;">${esc(p.description)}</p>
       ${tags ? `<p style="margin:0 0 20px;">${tags}</p>` : ""}
       ${gridImg}
@@ -958,14 +974,11 @@ function generateGuideImageHtml(d) {
   return `<style>
   @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/variable/pretendardvariable.css');
 </style>
-<div style="font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;color:#111122;max-width:1400px;margin:0 auto;padding:100px 80px;background:#fff;">
-  <div style="font-size:64px;font-weight:800;letter-spacing:-0.3px;line-height:1.1;margin:0 0 12px;">${esc(d.name)}</div>
+<div style="font-family:'Pretendard Variable','Pretendard',-apple-system,sans-serif;color:#111122;max-width:1024px;margin:0 auto;padding:50px 40px;background:#fff;">
+  <div style="font-size:40px;font-weight:800;letter-spacing:-0.3px;line-height:1.1;margin:0 0 12px;">${esc(d.name)}</div>
   <p style="font-size:16px;font-weight:400;line-height:21px;letter-spacing:-0.3px;margin:0 0 60px;">${esc(d.description)}</p>
   ${measurementHtml}
-  <div style="margin-bottom:60px;">
-    <h2 style="font-size:40px;font-weight:700;line-height:48px;letter-spacing:-0.3px;margin:0 0 40px;">Properties</h2>
-    ${propertySections}
-  </div>
+  ${propertySections}
 </div>`;
 }
 
@@ -988,8 +1001,10 @@ function generatePluginHtml(d) {
   // Anatomy image (base64 from plugin)
   let anatomySection = "";
   if (d.anatomyImage) {
+    const dim = pngDimensions(d.anatomyImage);
+    const sizeAttr = dim ? ` width="${dim.w}" height="${dim.h}"` : "";
     anatomySection = `<div style="position:relative;width:100%;background:#f8f9fa;border-radius:16px;overflow:hidden;padding:50px;box-sizing:border-box;text-align:center;">
-      <img src="${d.anatomyImage}" alt="Anatomy" style="max-width:100%;height:auto;display:inline-block;" />
+      <img src="${d.anatomyImage}" alt="Anatomy"${sizeAttr} style="height:auto;display:inline-block;max-width:100%;" />
     </div>`;
   }
 
