@@ -24,7 +24,9 @@ mds-wiki/
 ├── figma-plugin/      ← Figma 플러그인 (가이드 생성 + 위키 발행)
 │   ├── manifest.json
 │   ├── code.js
-│   └── ui.html
+│   ├── ui.html
+│   ├── MDSicon.png    ← 플러그인 아이콘
+│   └── skill.md
 ├── server/
 │   └── index.mjs      ← 공용 서버 (웹 에디터 + 플러그인 API)
 ├── public/            ← 웹 에디터 (HTML/CSS/JS)
@@ -35,12 +37,15 @@ mds-wiki/
 ├── scripts/
 │   ├── generate.mjs   ← JSON → Confluence HTML 변환
 │   └── preview.mjs    ← 로컬 브라우저 미리보기
-└── output/            ← 생성된 HTML 파일
+├── output/            ← 생성된 HTML 파일
+└── wiki.config.json   ← Figma/Confluence 설정 (토큰, URL 등)
 ```
 
 ## 실행
 
 ```bash
+npm start
+# 또는
 node server/index.mjs
 # → http://localhost:3456 에서 웹 에디터 + 플러그인 서버 동시 실행
 ```

@@ -1,0 +1,195 @@
+{
+  "name": "comp.image.circle (web)",
+  "description": "image circle 컴포넌트입니다.",
+  "figmaUrl": "https://www.figma.com/design/LrURUqr7x791p7GZNy6XOA/MDS_Components?node-id=2152-2986&t=As2wILCBm0OZ8nSm-4",
+  "anatomy": {
+    "imageUrl": "/uploads/figma-anatomy-2158-3264.png",
+    "figmaNodeId": "",
+    "slots": [],
+    "markers": [],
+    "guides": [],
+    "imageWidth": 52,
+    "imageHeight": 52
+  },
+  "properties": [
+    {
+      "title": "Size",
+      "description": "image circle의 크기를 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "3xs",
+          "isDefault": false
+        },
+        {
+          "label": "2xs",
+          "isDefault": false
+        },
+        {
+          "label": "xs",
+          "isDefault": false
+        },
+        {
+          "label": "sm",
+          "isDefault": false
+        },
+        {
+          "label": "md",
+          "isDefault": false
+        },
+        {
+          "label": "lg",
+          "isDefault": false
+        },
+        {
+          "label": "xl",
+          "isDefault": false
+        },
+        {
+          "label": "2xl",
+          "isDefault": true
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "3xs",
+          "imageUrl": "/uploads/figma-2158-3222.png",
+          "width": 16,
+          "height": 16
+        },
+        {
+          "label": "2xs",
+          "imageUrl": "/uploads/figma-2158-3144.png",
+          "width": 20,
+          "height": 20
+        },
+        {
+          "label": "xs",
+          "imageUrl": "/uploads/figma-2158-3116.png",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "label": "sm",
+          "imageUrl": "/uploads/figma-2158-3102.png",
+          "width": 28,
+          "height": 28
+        },
+        {
+          "label": "md",
+          "imageUrl": "/uploads/figma-2158-3065.png",
+          "width": 36,
+          "height": 36
+        },
+        {
+          "label": "lg",
+          "imageUrl": "/uploads/figma-2157-3015.png",
+          "width": 40,
+          "height": 40
+        },
+        {
+          "label": "xl",
+          "imageUrl": "/uploads/figma-2171-2195.png",
+          "width": 48,
+          "height": 48
+        },
+        {
+          "label": "2xl",
+          "imageUrl": "/uploads/figma-2158-3264.png",
+          "width": 52,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "title": "Type",
+      "description": "image circle의 타입을 설정합니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [
+        {
+          "label": "Image",
+          "isDefault": false
+        },
+        {
+          "label": "NoImg",
+          "isDefault": true
+        },
+        {
+          "label": "NoImgPerson",
+          "isDefault": false
+        },
+        {
+          "label": "PlaceHolder",
+          "isDefault": false
+        }
+      ],
+      "variantImages": [
+        {
+          "label": "Image",
+          "imageUrl": "/uploads/figma-2158-3252.png",
+          "width": 52,
+          "height": 52
+        },
+        {
+          "label": "NoImg",
+          "imageUrl": "/uploads/figma-2158-3264.png",
+          "width": 52,
+          "height": 52
+        },
+        {
+          "label": "NoImgPerson",
+          "imageUrl": "/uploads/figma-2158-3266.png",
+          "width": 52,
+          "height": 52
+        },
+        {
+          "label": "PlaceHolder",
+          "imageUrl": "/uploads/figma-2158-3269.png",
+          "width": 52,
+          "height": 52
+        }
+      ]
+    },
+    {
+      "title": "Example",
+      "description": "다양한 조합의 comp.image.circle 사용 예시입니다.",
+      "imageUrl": "",
+      "figmaNodeId": "",
+      "values": [],
+      "variantImages": [
+        {
+          "label": "2xl, NoImg",
+          "imageUrl": "/uploads/figma-example-2158-3264.png",
+          "width": 52,
+          "height": 52
+        },
+        {
+          "label": "md, Image",
+          "imageUrl": "/uploads/figma-example-2158-3061.png",
+          "width": 36,
+          "height": 36
+        },
+        {
+          "label": "2xl, Image",
+          "imageUrl": "/uploads/figma-example-2158-3252.png",
+          "width": 52,
+          "height": 52
+        },
+        {
+          "label": "xs, NoImg",
+          "imageUrl": "/uploads/figma-example-2158-3116.png",
+          "width": 24,
+          "height": 24
+        },
+        {
+          "label": "lg, NoImgPerson",
+          "imageUrl": "/uploads/figma-example-2157-3017.png",
+          "width": 40,
+          "height": 40
+        }
+      ]
+    }
+  ]
+}

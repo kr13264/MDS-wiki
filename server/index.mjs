@@ -87,7 +87,7 @@ async function handleRequest(req, res) {
 
   // ── Get component ──
   if (path.startsWith("/api/web/components/") && req.method === "GET") {
-    const id = path.split("/")[3];
+    const id = path.split("/")[4];
     const filePath = join(COMPONENTS_DIR, `${id}.json`);
     if (!existsSync(filePath)) return json(res, { error: "Not found" }, 404);
     const data = JSON.parse(readFileSync(filePath, "utf-8"));
@@ -96,7 +96,7 @@ async function handleRequest(req, res) {
 
   // ── Save component ──
   if (path.startsWith("/api/web/components/") && req.method === "PUT") {
-    const id = path.split("/")[3];
+    const id = path.split("/")[4];
     const body = await readBody(req);
     const data = JSON.parse(body.toString());
     writeFileSync(join(COMPONENTS_DIR, `${id}.json`), JSON.stringify(data, null, 2), "utf-8");
@@ -105,7 +105,7 @@ async function handleRequest(req, res) {
 
   // ── Delete component ──
   if (path.startsWith("/api/web/components/") && req.method === "DELETE") {
-    const id = path.split("/")[3];
+    const id = path.split("/")[4];
     const filePath = join(COMPONENTS_DIR, `${id}.json`);
     if (existsSync(filePath)) {
       const { unlinkSync } = await import("fs");
