@@ -68,10 +68,16 @@ async function loadSidebar() {
 async function selectComponent(id) {
   currentId = id;
   componentData = await api.get(`/api/web/components/${id}`);
+  if (!componentData.anatomy) componentData.anatomy = { imageUrl: "", figmaNodeId: "", slots: [] };
+  if (!componentData.properties) componentData.properties = [];
   propsEditMode = false;
   document.getElementById("empty-state").style.display = "none";
   document.getElementById("editor").style.display = "";
   renderEditor();
+  // 미리보기 탭이 활성화 상태면 미리보기도 갱신
+  if (document.getElementById("tab-preview").style.display !== "none") {
+    renderPreview();
+  }
   loadSidebar();
 }
 
