@@ -15,13 +15,13 @@ Figma에서 컴포넌트 데이터를 추출 → 웹 에디터(`localhost:3456`)
 Figma에서 직접 가이드 페이지 생성 → 플러그인에서 바로 Confluence 발행
 
 - API 경로: `/api/plugin/...`
-- 관련 파일: `figma-plugin/` (플러그인), `server/index.mjs` (서버)
+- 관련 파일: `figma-to-mds-wiki/` (플러그인), `server/index.mjs` (서버)
 
 ## 디렉토리 구조
 
 ```
 mds-wiki/
-├── figma-plugin/      ← Figma 플러그인 (가이드 생성 + 위키 발행)
+├── figma-to-mds-wiki/      ← Figma 플러그인 (가이드 생성 + 위키 발행)
 │   ├── manifest.json
 │   ├── code.js
 │   ├── ui.html
@@ -54,7 +54,7 @@ node server/index.mjs
 
 1. 이 레포를 클론
 2. `node server/index.mjs`로 서버 실행
-3. Figma → Plugins → Development → Import plugin from manifest → `figma-plugin/manifest.json` 선택
+3. Figma → Plugins → Development → Import plugin from manifest → `figma-to-mds-wiki/manifest.json` 선택
 4. 플러그인 설정(톱니바퀴)에서 Server URL, Confluence 정보, API Token 입력
 
 ## 주요 기능
